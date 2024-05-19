@@ -1,14 +1,16 @@
-vim.o.ts=4
-vim.o.sw=4
-vim.o.expandtab = true
-vim.o.signcolumn = 'yes'
-vim.o.mouse = 'a'
+require "sets"
+require "keys"
 
-vim.cmd('syntax on')
-vim.cmd('colorscheme tokyonight')
-vim.opt.formatoptions = vim.opt.formatoptions - 'r' - 'o';
-
-require 'packer_setup'
-require 'lsp_setup'
-require 'dap_setup'
-require 'alternate_shell_setup'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+require "lazy".setup("lazy-plugins")
