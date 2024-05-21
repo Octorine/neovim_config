@@ -14,3 +14,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require "lazy".setup("lazy-plugins")
+
+vim.api.nvim_create_user_command('Config', 
+    function() vim.cmd.edit("~/.config/nvim/init.lua")
+    end, {})
