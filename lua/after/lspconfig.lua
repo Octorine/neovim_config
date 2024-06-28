@@ -22,6 +22,8 @@ local on_attach = function(client, bufnr)
     --  local bufopts = { noremap=true, silent=true, buffer=bufnr }
     local bufopts = { noremap=true, silent=true}
     
+    -- Don't show red undercurl for every symbol we don't have documentation for.
+    vim.cmd [[hi clear @lsp.type.unresolvedReference]]
     -- Helper Function for setting keymaps
     
     -- Mappings.
